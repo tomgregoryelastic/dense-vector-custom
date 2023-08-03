@@ -1,0 +1,27 @@
+{% import "rally.helpers" as rally with context %}
+{
+  "version": 2,
+  "description": "Benchmark for dense vector indexing and search",
+  "indices": [
+    {
+      "name": "vectors",
+      "body": "index.json"
+    }
+  ],
+  "corpora": [
+    {
+      "name": "dense-vector-tg",
+      "documents": [
+        {
+          "source-file": "./data/10000000.json",
+          "document-count": 10000000
+        }
+      ]
+    }
+  ],
+  "operations": [
+    {{ rally.collect(parts="operations/*.json") }}
+  ],
+  "challenges": {{ rally.collect(parts="challenges/*.json") }}
+  
+}
